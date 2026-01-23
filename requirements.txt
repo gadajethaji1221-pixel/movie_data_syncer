@@ -1,4 +1,4 @@
 requests
-pymongo
+pymongo[srv]
 python-dotenv
 pytz
