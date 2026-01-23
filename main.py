@@ -1,4 +1,3 @@
-#pythno logic
 import os
 import logging
 from datetime import datetime
@@ -468,7 +467,7 @@ class StreamlinedDataPipeline:
         payload = {
             "chat_id": chat_id,
             "text": message,
-            "parse_mode": "MarkdownV2"
+            "parse_mode": "HTML"
         }
 
         try:
@@ -575,19 +574,20 @@ class StreamlinedDataPipeline:
         logger.info(f"📝 Full log saved to: logs/pipeline_{datetime.now().strftime('%Y%m%d')}.log\n")
                 # --- Telegram summary (summary only, no logs) ---
         telegram_summary = (
-            "📈 *Daily Pipeline Summary*\n\n"
-            f"• Total records processed from API: *{total_api:,}*\n"
-            f"• New records identified: *{total_new:,}*\n"
-            f"• Clean records validated: *{total_clean:,}*\n"
-            f"• Invalid records rejected: *{total_invalid:,}*\n"
-            f"• Database insertions: *{total_inserted:,}*\n"
-            f"• Database updates: *{total_updated:,}*\n"
-            f"• Net database change: *{change_str}*\n"
-            f"• Overall database size: *{total_old_db:,} → {total_new_db:,}*\n\n"
-            f"⏱️ Finished at: `{end_time} IST`"
+            "📈 <b>Daily Pipeline Summary</b>\n\n"
+            f"• Total records processed from API: <b>{total_api:,}</b>\n"
+            f"• New records identified: <b>{total_new:,}</b>\n"
+            f"• Clean records validated: <b>{total_clean:,}</b>\n"
+            f"• Invalid records rejected: <b>{total_invalid:,}</b>\n"
+            f"• Database insertions: <b>{total_inserted:,}</b>\n"
+            f"• Database updates: <b>{total_updated:,}</b>\n"
+            f"• Net database change: <b>{change_str}</b>\n"
+            f"• Overall database size: <b>{total_old_db:,} → {total_new_db:,}</b>\n\n"
+            f"⏱️ Finished at: <code>{end_time} IST</code>"
         )
 
         self.send_telegram_message(telegram_summary)
+
 
     
     def close(self):
