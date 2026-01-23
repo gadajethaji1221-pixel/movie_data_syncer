@@ -24,3 +24,10 @@ jobs:
         env:
           Database_connection_key: ${{ secrets.Database_connection_key }}
         run: python main.py
+
+      - name: Upload logs
+        if: always()   # uploads logs even if pipeline fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-logs
+          path: logs/
