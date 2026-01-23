@@ -23,7 +23,10 @@ jobs:
       - name: Run pipeline
         env:
           Database_connection_key: ${{ secrets.Database_connection_key }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ALLOWED_USER_ID: ${{ secrets.ALLOWED_USER_ID }}
         run: python main.py
+
 
       - name: Upload logs
         if: always()   # uploads logs even if pipeline fails
