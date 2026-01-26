@@ -2,7 +2,7 @@ name: Nightly Data Pipeline
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # 12:00 AM IST
+    - cron: "30 18 * * *"   # 12:00 AM IST
   workflow_dispatch:
 
 jobs:
@@ -10,26 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
 
       - name: Run pipeline
         env:
           Database_connection_key: ${{ secrets.Database_connection_key }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           ALLOWED_USER_ID: ${{ secrets.ALLOWED_USER_ID }}
-        run: python main.py
-
+        run: |
+          python main.py
 
       - name: Upload logs
-        if: always()   # uploads logs even if pipeline fails
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pipeline-logs
