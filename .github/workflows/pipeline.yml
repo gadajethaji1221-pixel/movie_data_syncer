@@ -2,7 +2,7 @@ name: Nightly Data Pipeline
 
 on:
   schedule:
-    - cron: "30 18 * * *"   # 12:00 AM IST
+    - cron: "*/5 * * * *"   # 12:00 AM IST
   workflow_dispatch:
 
 jobs:
