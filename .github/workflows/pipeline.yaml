@@ -2,7 +2,7 @@ name: Nightly Data Pipeline
 
 on:
   schedule:
-    - cron: "20 07 * * *"   # 12:00 AM IST
+    - cron: "30 06 * * *"   # 12:00 AM IST
   workflow_dispatch:
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
 
       - name: Run pipeline
         env:
-          Database_connection_key: ${{ secrets.Database_connection_key }}
+          Database_connection_key: ${{ secrets.DATABASE_CONNECTION_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           ALLOWED_USER_ID: ${{ secrets.ALLOWED_USER_ID }}
         run: |
